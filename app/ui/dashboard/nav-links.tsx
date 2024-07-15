@@ -2,6 +2,9 @@
 
 
 import {
+  Cog6ToothIcon,
+  BookOpenIcon,
+  ClipboardIcon,
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
@@ -17,9 +20,9 @@ import clsx from 'clsx';
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  { name: 'Inventory', href: '/dashboard/inventory', icon: UserGroupIcon },
-  { name: 'Production', href: '/dashboard/production', icon: UserGroupIcon },
-  { name: 'Recipies', href: '/dashboard/recipies', icon: UserGroupIcon },
+  { name: 'Production', href: '/dashboard/production', icon: Cog6ToothIcon },
+  { name: 'Inventory', href: '/dashboard/inventory', icon: ClipboardIcon },
+  { name: 'Recipies', href: '/dashboard/recipies', icon: BookOpenIcon },
   { name: 'Invoices', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
   { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
   
