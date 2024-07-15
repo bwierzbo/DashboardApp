@@ -24,7 +24,7 @@ const links = [
   { name: 'Inventory', href: '/dashboard/inventory', icon: ClipboardIcon },
   { name: 'Recipies', href: '/dashboard/recipies', icon: BookOpenIcon },
   { name: 'Invoices', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
-  { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
+  { name: 'Suppliers', href: '/dashboard/suppliers', icon: UserGroupIcon },
   
 ];
 
