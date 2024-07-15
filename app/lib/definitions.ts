@@ -55,6 +55,15 @@ export type InvoicesTable = {
   status: 'pending' | 'paid';
 };
 
+export type SuppliersTable = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  apples: string;
+};
+
 export type CustomersTableType = {
   id: string;
   name: string;

@@ -5,6 +5,7 @@ import {
   CustomersTableType,
   InvoiceForm,
   InvoicesTable,
+  SuppliersTable,
   LatestInvoiceRaw,
   Revenue,
 } from './definitions';
@@ -122,6 +123,32 @@ export async function fetchFilteredInvoices(
   }
 }
 
+export async function fetchFilteredSuppliers(
+  query: string,
+  currentPage: number,
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const suppliers = await sql<SuppliersTable>`
+      SELECT
+        suppliers.id,
+        suppliers.name,
+        suppliers.email,
+        suppliers.phone,
+        suppliers.address,
+        suppliers.apples
+      FROM suppliers
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+
+    return suppliers.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch suppliers.');
+  }
+}
+
 export async function fetchInvoicesPages(query: string) {
   try {
     const count = await sql`SELECT COUNT(*)
@@ -133,6 +160,25 @@ export async function fetchInvoicesPages(query: string) {
       invoices.amount::text ILIKE ${`%${query}%`} OR
       invoices.date::text ILIKE ${`%${query}%`} OR
       invoices.status ILIKE ${`%${query}%`}
+  `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of invoices.');
+  }
+}
+
+export async function fetchSuppliersPages(query: string) {
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM suppliers
+    WHERE
+      suppliers.name ILIKE ${`%${query}%`} OR
+      suppliers.email ILIKE ${`%${query}%`} OR
+      suppliers.phone::text ILIKE ${`%${query}%`} OR
+      suppliers.address::text ILIKE ${`%${query}%`}
   `;
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
